@@ -2,17 +2,18 @@
 # Objetivo deste programa é criar uma forma de
 # de avaliar o mercado financeiro com queries
 # poderosas.
-import b3api as b3
 import pandas as pd
+import pandas_datareader.data as pdr
 import yfinance as yf
 import matplotlib as mlp
 import matplotlib.pyplot as plt
 import numpy as np
+import graphs.history_prices as hp
 import inspect
 
 # Nome/quantidade/tipo
 ativos_carteira = [
-          ['BMGD4',100,'stock'],
+          ['BMGD4.SA',100,'stock'],
           ['CARE11.SA',2,'stock'],
           ]
 
@@ -31,9 +32,11 @@ def aporte():
     return 0
 
 def main():
-    ticker2 = yf.Ticker(ativos_carteira[1][0])
-    print(ticker2.history("8d"))
-    status_carteira()
+    start_date = "2020-01-1"
+    end_date = "2020-12-31"
+    ticker2 = pdr.DataReader(name=ativos_carteira[1][0],data_source='yahoo',start=start_date,end=end_date)
+    print(ticker2['Close'])
+    hp.history(ticker2['Close'])
     return 0
 
 
