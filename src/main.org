@@ -1,0 +1,6 @@
+#+title: Main
+My exploratory analysis of stocks, and demonstration of
+literate programming in investing.
+The goal of this project is to create a CLI to track
+stock portifolio information and provide a quick data visualization
+* Query data from stocks
