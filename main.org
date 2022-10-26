@@ -1,0 +1,72 @@
+#+title: Main
+My exploratory analysis of stocks, and demonstration of
+literate programming in investing.
+The goal of this project is to create a CLI to track
+stock portifolio information and provide a quick data visualization
+* Objetivo
+Buscar dados fundamentalistas na CVM, obter informações de tickers, possibilitar o
+acompanhamento de ativos listados na carteira. Gerar API rest com os dados
+tratados para o frontend web, ter uma interface rapido de feedback local.
+* Programa
+** Stack
+Matplotlib,seaborn e plotly para demonstrar os graficos
+localmente.
+Pandas para tratamento dos dados.
+Mongodb para banco de dados.
+Flask para API rest.
+** Fluxo principal do programa
+*** Imports do programa
+#+begin_src python :tangle ./main.py
+#!/usr/bin/env python3
+import datetime
+import requests
+import pandas as pd
+import pandas_datareader as pdr
+import yfinance as yf
+import matplotlib as mlp
+import matplotlib.pyplot as plt
+import numpy as np
+import inspect
+#+end_src
+*** Criar tickers
+Aqui crio a lista dinâmica de tickers que o programa usa para realizer queries,
+#+begin_src python :tangle ./main.py
+ativos_carteira = [
+          ['BMGB4.SA',100,'stock'],
+          ['PETR4.SA',2,'stock'],
+          ]
+
+tickers=[]
+#+end_src
+
+*** Funções principais do programa.
+#+begin_src python :tangle ./main.py
+def status_carteira():
+    # for i in range(len(ativos_carteira)):
+    #     tickers.append(yf.Ticker(ativos_carteira[i][0]))
+    #     print(id(tickers[i]))
+    return 0
+
+def aporte():
+    #Aqui implementarei a logica do aporte mensal
+    return 0
+
+def ColetaDFP():
+    # for i in range(2011,datetime.date.todary().year)):
+        # f"https://dados.cvm.gov.br/dados/CIA_ABERTA/DOC/DFP/DADOS/dfp_cia_aberta_{i}.zip"
+    return 0
+
+def main():
+    r = requests.get('http://dados.cvm.gov.br/dados/CIA_ABERTA/CAD/DADOS/cad_cia_aberta.csv')
+    lines = [i.strip().split(';') for i in r.text.split('\n')]
+    df = pd.DataFrame(lines[1:],columns=lines[0])
+    print(df.head())
+    return 0
+
+#+end_src
+*** __main__
+#+begin_src python
+if __name__ == '__main__':
+    main()
+#+end_src
+** Banco de dados
