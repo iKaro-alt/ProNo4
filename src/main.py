@@ -5,13 +5,13 @@ import pandas as pd
 import pandas_datareader as pdr
 import yfinance as yf
 import numpy as np
-import database.connect
+import database.connect as con
 
 # Nome/quantidade/tipo
-ativos_carteira = [
-          ['BMGB4.SA',100,'stock'],
-          ['PETR4.SA',2,'stock'],
-          ]
+# ativos_carteira = [
+#           ['BMGB4.SA',100,'stock'],
+#           ['PETR4.SA',2,'stock'],
+#           ]
 
 tickers=[]
 
@@ -27,10 +27,13 @@ def aporte():
     return 0
 
 def main():
-    r = requests.get('http://dados.cvm.gov.br/dados/CIA_ABERTA/CAD/DADOS/cad_cia_aberta.csv')
-    lines = [i.strip().split(';') for i in r.text.split('\n')]
-    df = pd.DataFrame(lines[1:],columns=lines[0])
-    print(df.info())
+    # r = requests.get('http://dados.cvm.gov.br/dados/CIA_ABERTA/CAD/DADOS/cad_cia_aberta.csv')
+    # lines = [i.strip().split(';') for i in r.text.split('\n')]
+    # df = pd.DataFrame(lines[1:],columns=lines[0])
+    # print(df.info())
+    collection = con.db["Ativos"]
+    data = list(collection.find())
+    print(len(data))
     return 0
 
 
