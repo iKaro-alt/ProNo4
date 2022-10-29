@@ -8,13 +8,12 @@ import numpy as np
 import database.connect as con
 
 # Nome/quantidade/tipo
-# ativos_carteira = [
-#           ['BMGB4.SA',100,'stock'],
-#           ['PETR4.SA',2,'stock'],
-#           ]
+collection = con.db["Ativos"]
+data = list(collection.find())
+for i in data:
+    print(i)
 
 tickers=[]
-
 
 def status_carteira():  #Esta função retorna o status da carteira,
     for i in range(len(ativos_carteira)):
@@ -27,15 +26,11 @@ def aporte():
     return 0
 
 def main():
-    # r = requests.get('http://dados.cvm.gov.br/dados/CIA_ABERTA/CAD/DADOS/cad_cia_aberta.csv')
-    # lines = [i.strip().split(';') for i in r.text.split('\n')]
-    # df = pd.DataFrame(lines[1:],columns=lines[0])
-    # print(df.info())
-    collection = con.db["Ativos"]
-    data = list(collection.find())
-    print(len(data))
+    r = requests.get('http://dados.cvm.gov.br/dados/CIA_ABERTA/CAD/DADOS/cad_cia_aberta.csv')
+    lines = [i.strip().split(';') for i in r.text.split('\n')]
+    df = pd.DataFrame(lines[1:],columns=lines[0])
+    print(df.info())
     return 0
-
 
 if __name__ == '__main__':
     main()

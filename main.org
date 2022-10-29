@@ -4,69 +4,17 @@ literate programming in investing.
 The goal of this project is to create a CLI to track
 stock portifolio information and provide a quick data visualization
 * Objetivo
-Buscar dados fundamentalistas na CVM, obter informações de tickers, possibilitar o
-acompanhamento de ativos listados na carteira. Gerar API rest com os dados
-tratados para o frontend web, ter uma interface rapido de feedback local.
-* Programa
-** Stack
-Matplotlib,seaborn e plotly para demonstrar os graficos
-localmente.
-Pandas para tratamento dos dados.
-Mongodb para banco de dados.
-Flask para API rest.
-** Fluxo principal do programa
-*** Imports do programa
-#+begin_src python :tangle ./main.py
-#!/usr/bin/env python3
-import datetime
-import requests
+Realizar analise exploratorio de ativos no mercado financeiro com python e outras
+ferramentas.
+* Ativos
+** Ações
+*** PETR4 | Petrobras
+#+begin_src python :results output
+#https://sistemas.cvm.gov.br/port/redir.asp?subpage=ofertaregistrada
 import pandas as pd
-import pandas_datareader as pdr
 import yfinance as yf
-import matplotlib as mlp
-import matplotlib.pyplot as plt
-import numpy as np
-import inspect
-#+end_src
-*** Criar tickers
-Aqui crio a lista dinâmica de tickers que o programa usa para realizer queries,
-#+begin_src python :tangle ./main.py
-ativos_carteira = [
-          ['BMGB4.SA',100,'stock'],
-          ['PETR4.SA',2,'stock'],
-          ]
-
-tickers=[]
+print(yf.Ticker('PETR4.SA').info)
 #+end_src
 
-*** Funções principais do programa.
-#+begin_src python :tangle ./main.py
-def status_carteira():
-    # for i in range(len(ativos_carteira)):
-    #     tickers.append(yf.Ticker(ativos_carteira[i][0]))
-    #     print(id(tickers[i]))
-    return 0
-
-def aporte():
-    #Aqui implementarei a logica do aporte mensal
-    return 0
-
-def ColetaDFP():
-    # for i in range(2011,datetime.date.todary().year)):
-        # f"https://dados.cvm.gov.br/dados/CIA_ABERTA/DOC/DFP/DADOS/dfp_cia_aberta_{i}.zip"
-    return 0
-
-def main():
-    r = requests.get('http://dados.cvm.gov.br/dados/CIA_ABERTA/CAD/DADOS/cad_cia_aberta.csv')
-    lines = [i.strip().split(';') for i in r.text.split('\n')]
-    df = pd.DataFrame(lines[1:],columns=lines[0])
-    print(df.head())
-    return 0
-
-#+end_src
-*** __main__
-#+begin_src python
-if __name__ == '__main__':
-    main()
-#+end_src
-** Banco de dados
+#+RESULTS:
+: {'zip': '20031-912', 'sector': 'Energy', 'fullTimeEmployees': 45532, 'longBusinessSummary': 'Petróleo Brasileiro S.A. - Petrobras explores for, produces, and sells oil and gas in Brazil and internationally. The company operates through Exploration and Production; Refining, Transportation and Marketing; Gas and Power; and Corporate and Other Businesses segments. It engages in prospecting, drilling, refining, processing, trading, and transporting crude oil from producing onshore and offshore oil fields, and shale or other rocks, as well as oil products, natural gas, and other liquid hydrocarbons. The Exploration and Production segment explores, develops, and produces crude oil, natural gas liquids, and natural gas primarily for supplies to the domestic refineries. The Refining, Transportation and Marketing segment engages in the refining, logistics, transport, marketing, and trading of crude oil and oil products; exportation of ethanol; and extraction and processing of shale, as well as holding interests in petrochemical companies. The Gas and Power segment is involved in the logistic and trading of natural gas and electricity; transportation and trading of LNG; generation of electricity through thermoelectric power plants; holding interests in transportation and distribution of natural gas; and fertilizer production and natural gas processing business. The Corporate and Other Businesses segment produces biodiesel and its co-products, and ethanol; and distributes oil products. Petróleo Brasileiro S.A. - Petrobras was incorporated in 1953 and is headquartered in Rio de Janeiro, Brazil.', 'city': 'Rio De Janeiro', 'phone': '55 21 3224 4477', 'state': 'RJ', 'country': 'Brazil', 'companyOfficers': [], 'website': 'https://petrobras.com.br', 'maxAge': 1, 'address1': 'Avenida RepUblica do Chile, 65', 'industry': 'Oil & Gas Integrated', 'address2': 'Centro', 'ebitdaMargins': 0.52679, 'profitMargins': 0.2842, 'grossMargins': 0.50886, 'operatingCashflow': 231119994880, 'revenueGrowth': 0.544, 'operatingMargins': 0.46785, 'ebitda': 299421007872, 'targetLowPrice': 13, 'recommendationKey': 'buy', 'grossProfits': 219637000000, 'freeCashflow': 200201879552, 'targetMedianPrice': 43.25, 'currentPrice': 32.57, 'earningsGrowth': 0.268, 'currentRatio': 1.313, 'returnOnAssets': 0.17079, 'numberOfAnalystOpinions': 10, 'targetMeanPrice': 40.77, 'debtToEquity': 67.975, 'returnOnEquity': 0.41849, 'targetHighPrice': 53, 'totalCash': 100267999232, 'totalDebt': 280637014016, 'totalRevenue': 568385011712, 'totalCashPerShare': 7.687, 'financialCurrency': 'BRL', 'revenuePerShare': 43.574, 'quickRatio': 0.779, 'recommendationMean': 2.4, 'exchange': 'SAO', 'shortName': 'PETROBRAS   PN      N2', 'longName': 'Petróleo Brasileiro S.A. - Petrobras', 'exchangeTimezoneName': 'America/Sao_Paulo', 'exchangeTimezoneShortName': 'BRST', 'isEsgPopulated': False, 'gmtOffSetMilliseconds': '-7200000', 'quoteType': 'EQUITY', 'symbol': 'PETR4.SA', 'messageBoardId': 'finmb_409268', 'market': 'br_market', 'annualHoldingsTurnover': None, 'enterpriseToRevenue': 1.078, 'beta3Year': None, 'enterpriseToEbitda': 2.046, '52WeekChange': 0.21399629, 'morningStarRiskRating': None, 'forwardEps': 10.26, 'revenueQuarterlyGrowth': None, 'sharesOutstanding': 5601970176, 'fundInceptionDate': None, 'annualReportExpenseRatio': None, 'totalAssets': None, 'bookValue': 31.473, 'sharesShort': None, 'sharesPercentSharesOut': None, 'fundFamily': None, 'lastFiscalYearEnd': 1640908800, 'heldPercentInstitutions': 0.33655, 'netIncomeToCommon': 161536999424, 'trailingEps': 12.82, 'lastDividendValue': 6.732003, 'SandP52WeekChange': -0.173293, 'priceToBook': 1.0348552, 'heldPercentInsiders': 0.16073, 'nextFiscalYearEnd': 1703980800, 'yield': None, 'mostRecentQuarter': 1656547200, 'shortRatio': None, 'sharesShortPreviousMonthDate': None, 'floatShares': 8268327853, 'beta': 1.334365, 'enterpriseValue': 612612898816, 'priceHint': 2, 'threeYearAverageReturn': None, 'lastSplitDate': 1209340800, 'lastSplitFactor': '2:1', 'legalType': None, 'lastDividendDate': 1660262400, 'morningStarOverallRating': None, 'earningsQuarterlyGrowth': 0.268, 'priceToSalesTrailing12Months': 0.7910696, 'dateShortInterest': None, 'pegRatio': 0.11, 'ytdReturn': None, 'forwardPE': 3.1744637, 'lastCapGain': None, 'shortPercentOfFloat': None, 'sharesShortPriorMonth': None, 'impliedSharesOutstanding': 0, 'category': None, 'fiveYearAverageReturn': None, 'previousClose': 32.96, 'regularMarketOpen': 32.7, 'twoHundredDayAverage': 31.878, 'trailingAnnualDividendYield': 0.38968447, 'payoutRatio': 0.955, 'volume24Hr': None, 'regularMarketDayHigh': 33.12, 'navPrice': None, 'averageDailyVolume10Day': 110076110, 'regularMarketPreviousClose': 32.96, 'fiftyDayAverage': 32.5036, 'trailingAnnualDividendRate': 12.844, 'open': 32.7, 'toCurrency': None, 'averageVolume10days': 110076110, 'expireDate': None, 'algorithm': None, 'dividendRate': 10.45, 'exDividendDate': 1660262400, 'circulatingSupply': None, 'startDate': None, 'regularMarketDayLow': 31.86, 'currency': 'BRL', 'trailingPE': 2.5405617, 'regularMarketVolume': 128500300, 'lastMarket': None, 'maxSupply': None, 'openInterest': None, 'marketCap': 449632108544, 'volumeAllCurrencies': None, 'strikePrice': None, 'averageVolume': 90579925, 'dayLow': 31.86, 'ask': 32.24, 'askSize': 0, 'volume': 128500300, 'fiftyTwoWeekHigh': 38.39, 'fromCurrency': None, 'fiveYearAvgDividendYield': None, 'fiftyTwoWeekLow': 25.72, 'bid': 32.25, 'tradeable': False, 'dividendYield': 0.317, 'bidSize': 0, 'dayHigh': 33.12, 'coinMarketCapLink': None, 'regularMarketPrice': 32.57, 'preMarketPrice': None, 'logo_url': 'https://logo.clearbit.com/petrobras.com.br'}
