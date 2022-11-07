@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import zipfile
 import datetime
 import pandas_datareader as pdr
 import yfinance as yf
@@ -26,8 +27,10 @@ def aporte():
     return 0
 
 def main():
-    # cvm = scraper.scraperCVM()
-    cvm.prepareDFP()
+    cvm = scraper.scraperCVM()
+    dfps = cvm.prepareDFP()
+    print(dfps)
+    # uncompressed_data = zipfile.ZipFile('./scrapping/dfps/dfp_cia_aberta_2010.zip','r')
     return 0
 
 if __name__ == '__main__':

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import pandas as pd
+import zipfile
 import requests
 class scraperCVM:
 
@@ -18,16 +19,9 @@ class scraperCVM:
 
     def prepareDFP(self):
         dfps=[]
-        rootDir = os.getcwd()
-        os.chdir(rootDir+"/scrapping/dfps")
-        for file in os.listdir(os.getcwd()):
-            uncompressed_data = zipfile.ZipFile(file)
+        for file in os.listdir('./scrapping/dfps'):
+            uncompressed_data = zipfile.ZipFile(f'./scrapping/dfps/{file}','w')
             for spread in uncompressed_data.namelist():
-                df = pd.read_csv(
-                    file.open(spread)),
-                    sep = ";",
-                    encoding="ISO-8859-1",
-                    dtype={"ORDEM_EXERC":"category"})
-                    dfps.append(df)
-        os.chdir(rootDir)
+                df = pd.read_csv(file.open(spread), sep = ";", encoding="ISO-8859-1", dtype={"ORDEM_EXERC":"category"})
+                dfps.append(df)
         return dfps
