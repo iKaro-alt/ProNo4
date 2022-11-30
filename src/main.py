@@ -29,7 +29,7 @@ def aporte():
 def main():
     cvm = scraper.scraperCVM()
     dfps = cvm.prepareDFP()
-    print(dfps)
+
     # uncompressed_data = zipfile.ZipFile('./scrapping/dfps/dfp_cia_aberta_2010.zip','r')
     return 0
 
